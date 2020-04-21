@@ -21,10 +21,11 @@ def get_training_accuracy(data, inqtabs_dict, swn_dict):
     for etype in ["fp", "fn", "tp", "tn"]:
         etype_files[etype] = open(etype + '.txt', 'w')
     for row in data:
-        #cleaned_review = sentiment.preprocess_reviews(row['Review'])
         sentiment_prediction = sentiment.classify(row['Review'], inqtabs_dict, swn_dict)
+        #print(data)
+        #print(row['Review'])
         sentiment_label = int(row['Category'])
-        #print(sentiment_label)
+        #print(type(sentiment_label))
         if sentiment_prediction == sentiment_label:
             num_correct += 1
         etype = sentiment.get_error_type(sentiment_prediction, sentiment_label)
